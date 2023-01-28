@@ -4,8 +4,7 @@ import Footer from "./Footer.js";
 import { useState, useContext } from "react";
 import DisplayTrucks from "./DisplayTrucks";
 import TruckSelect from "./TruckSelect";
-import { Link } from "react-router-dom";
-import { LoginContext, ThemeContext } from "./App.js";
+import { ThemeContext } from "./App.js";
 
 export default function Home({ setDarkMode }) {
   let darkMode = useContext(ThemeContext);
