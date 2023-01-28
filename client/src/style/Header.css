@@ -1,0 +1,7 @@
+.header {
+  width: 100%;
+}
+.headerItems {
+  display: inline-block;
+  margin-right: 10px;
+}

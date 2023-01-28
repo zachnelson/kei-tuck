@@ -1,0 +1,13 @@
+.footer {
+  width: 100%;
+  background-color: grey;
+  text-align: center;
+  display: inline-block;
+}
+.footerElements {
+  display: inline-block;
+}
+#topLink {
+  padding-left: 10px;
+  cursor: pointer;
+}
