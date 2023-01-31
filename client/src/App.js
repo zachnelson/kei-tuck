@@ -3,6 +3,7 @@ import { useState, createContext } from "react";
 import Home from "./Home";
 import Login from "./Login";
 import NotFound from "./NotFound";
+import Account from "./Account";
 import { Routes, Route } from "react-router-dom";
 
 export const LoginContext = createContext(null);
@@ -21,6 +22,10 @@ export default function App() {
             <Route
               path="/login"
               element={<Login setDarkMode={setDarkMode} />}
+            />
+            <Route
+              path="/account"
+              element={<Account setDarkMode={setDarkMode} />}
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
