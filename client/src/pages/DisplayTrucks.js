@@ -1,5 +1,5 @@
-import trucks from "./data/trucks.json";
-import "./style/DisplayTrucks.css";
+import trucks from "../data/trucks.json";
+import "../style/DisplayTrucks.css";
 
 export default function DisplayTrucks({ model, color, year, type }) {
   let trucksFilter = trucks.filter((truck) => {

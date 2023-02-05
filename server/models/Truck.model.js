@@ -17,9 +17,9 @@ var TruckSchema = new Schema({
   vehicleType: String,
   headlights: String,
   price: String,
-  for_sale: Boolean,
+  for_sale: { type: Boolean, default: false },
   image: String,
-  owner: {
+  ownerId: {
     type: Schema.ObjectId,
     ref: "User",
   },

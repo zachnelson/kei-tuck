@@ -1,13 +1,11 @@
-import "./style/App.css";
+import "../style/App.css";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import DisplayTrucks from "./DisplayTrucks";
 import TruckSelect from "./TruckSelect";
-import { ThemeContext } from "./App.js";
 
-export default function Home({ setDarkMode }) {
-  let darkMode = useContext(ThemeContext);
+export default function Home() {
   let [model, setModel] = useState("");
   let [color, setColor] = useState("");
   let [year, setYear] = useState("");
@@ -20,8 +18,8 @@ export default function Home({ setDarkMode }) {
     setType("");
   }
   function toggleDarkMode() {
-    document.body.className = darkMode ? "darkMode" : "";
-    setDarkMode(!darkMode);
+    document.body.className = true ? "darkMode" : "";
+    //setDarkMode(!darkMode);
   }
   return (
     <>

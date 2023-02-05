@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-import "./style/App.css";
+import "../style/App.css";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { ThemeContext } from "./App";
 
 export default function NotFound() {
-  let darkMode = useContext(ThemeContext);
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
@@ -13,7 +10,7 @@ export default function NotFound() {
     }, 3000);
   });
 
-  document.body.className = darkMode ? "darkMode" : "";
+  document.body.className = true ? "darkMode" : "";
 
   return (
     <>

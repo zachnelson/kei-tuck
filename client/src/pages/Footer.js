@@ -1,4 +1,4 @@
-import "./style/Footer.css";
+import "../style/Footer.css";
 export default function Footer() {
   const scrollToTop = () => {
     window.scroll({

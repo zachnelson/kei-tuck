@@ -66,3 +66,6 @@
 .center {
   text-align: center;
 }
+.headerItems {
+  cursor: pointer;
+}
