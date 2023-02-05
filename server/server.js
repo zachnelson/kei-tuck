@@ -1,12 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 const app = express();
 const bodyParser = require("body-parser");
 const PORT = 5000;
-require("dotenv").config();
 const userRoutes = require("./routes/user");
-let User = require("./models/User.model");
-let Truck = require("./models/Truck.model");
+const truckRoutes = require("./routes/truck");
 
 const uri =
   "mongodb+srv://" +
@@ -33,17 +32,6 @@ app.use(
 );
 
 app.use("/api/user", userRoutes);
-
-//get all users
-// app.get("/users", (req, res) => {
-//   console.log("getting all users...");
-//   User.find({}).exec((err, users) => {
-//     if (err) res.send("Error: " + err);
-//     else {
-//       //console.log(users);
-//       res.json(users);
-//     }
-//   });
-// });
+app.use("/api/truck", truckRoutes);
 
 app.listen(PORT, () => console.log("Server started on port: " + PORT));
