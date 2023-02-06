@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
-import Header from "./Header";
+import "../style/Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,25 +14,29 @@ export default function Login() {
   }
 
   return (
-    <>
-      <Header />
-      <form className="login" onSubmit={handleSubmit}>
-        <h3>Login</h3>
-        <label>Email:</label>
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-        <button disabled={isLoading}>Login</button>
-        {error && <div className="error">{error}</div>}
-      </form>
-    </>
+    <div className="loginPage">
+      {/* <Header /> */}
+      <div className="loginPic" />
+      <div className="loginForm">
+        <form className="login" onSubmit={handleSubmit}>
+          <h3>Login</h3>
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <br></br>
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+          <button disabled={isLoading}>Login</button>
+          <div className="error">{error}</div>
+        </form>
+      </div>
+    </div>
   );
 }

@@ -1,4 +1,6 @@
 import "../style/Footer.css";
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   const scrollToTop = () => {
     window.scroll({
@@ -9,7 +11,9 @@ export default function Footer() {
 
   return (
     <div className="footer">
-      <h1 className="footerElements">Kei Truck Trader</h1>
+      <Link to="/">
+        <h1 className="footerElements">Kei Truck Trader</h1>
+      </Link>
       <span id="topLink" className="footerElements" onClick={scrollToTop}>
         Back to top
       </span>
