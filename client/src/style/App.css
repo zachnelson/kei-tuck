@@ -66,6 +66,21 @@
 .center {
   text-align: center;
 }
+.body {
+  position: relative;
+  min-height: 100vh;
+}
+.topContent {
+  padding-bottom: 75px;
+}
 .headerItems {
   cursor: pointer;
+}
+.truckList {
+  position: relative;
+  left: 265px;
+  top: 75px;
+  right: 0;
+  display: block;
+  margin-bottom: 75px;
 }

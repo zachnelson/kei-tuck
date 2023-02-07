@@ -1,7 +1,16 @@
-.header {
+header {
   width: 100%;
+  border-bottom: 1px solid black;
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 75px;
+  z-index: 1000;
 }
 .headerItems {
   display: inline-block;
   margin-right: 10px;
+}
+.links {
+  float: right;
 }

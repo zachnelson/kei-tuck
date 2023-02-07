@@ -25,33 +25,35 @@ export default function Header() {
         <Link to="/">
           <h1 className="headerItems">Kei Truck Trader</h1>
         </Link>
-        <button
-          className="headerItems"
-          title="Toggle Dark Mode"
-          onClick={toggleDarkMode}
-        >
-          {icon}
-        </button>
-        {user === null ? (
-          <>
-            <Link className="headerItems" to="/login">
-              Login
-            </Link>
-            <Link className="headerItems" to="/signup">
-              Signup
-            </Link>
-          </>
-        ) : (
-          <>
-            <span className="headerItems">Hello, {user.name}</span>
-            <Link className="headerItems" to="/account">
-              My Account
-            </Link>
-            <Link className="headerItems" to="/" onClick={handleClick}>
-              Logout
-            </Link>
-          </>
-        )}
+        <span className="links">
+          <button
+            className="headerItems"
+            title="Toggle Dark Mode"
+            onClick={toggleDarkMode}
+          >
+            {icon}
+          </button>
+          {user === null ? (
+            <>
+              <Link className="headerItems" to="/login">
+                Login
+              </Link>
+              <Link className="headerItems" to="/signup">
+                Signup
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className="headerItems">Hello, {user.name}</span>
+              <Link className="headerItems" to="/account">
+                My Account
+              </Link>
+              <Link className="headerItems" to="/" onClick={handleClick}>
+                Logout
+              </Link>
+            </>
+          )}
+        </span>
       </div>
     </header>
   );

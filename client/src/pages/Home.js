@@ -4,6 +4,7 @@ import Footer from "./Footer.js";
 import { useState } from "react";
 import DisplayTrucks from "./DisplayTrucks";
 import TruckSelect from "./TruckSelect";
+import Sidebar from "./Sidebar";
 
 export default function Home() {
   let [model, setModel] = useState("");
@@ -17,22 +18,20 @@ export default function Home() {
     setYear("");
     setType("");
   }
-  function toggleDarkMode() {
-    document.body.className = true ? "darkMode" : "";
-    //setDarkMode(!darkMode);
-  }
   return (
-    <>
-      <Header toggleDarkMode={toggleDarkMode} />
-      <div>
-        <TruckSelect dataType={"model"} data={model} func={setModel} />
-        <TruckSelect dataType={"color"} data={color} func={setColor} />
-        <TruckSelect dataType={"year"} data={year} func={setYear} />
-        <TruckSelect dataType={"type"} data={type} func={setType} />
-        <button onClick={resetFilter}>Reset filter</button>
+    <div className="body">
+      <div className="topContent">
+        <Header />
+        <Sidebar>
+          <TruckSelect dataType={"model"} data={model} func={setModel} />
+          <TruckSelect dataType={"color"} data={color} func={setColor} />
+          <TruckSelect dataType={"year"} data={year} func={setYear} />
+          <TruckSelect dataType={"type"} data={type} func={setType} />
+          <button onClick={resetFilter}>Reset filter</button>
+        </Sidebar>
+        <DisplayTrucks model={model} color={color} year={year} type={type} />
       </div>
-      <DisplayTrucks model={model} color={color} year={year} type={type} />
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
-import "../style/Login.css";
+import { Link } from "react-router-dom";
+import "../style/Credentials.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -9,16 +10,19 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     await login(email, password);
   }
 
   return (
     <div className="loginPage">
-      {/* <Header /> */}
-      <div className="loginPic" />
+      <div className="bigPic" />
       <div className="loginForm">
         <form className="login" onSubmit={handleSubmit}>
+          <div>
+            <Link to="/">
+              <h2>Kei Truck Trader</h2>
+            </Link>
+          </div>
           <h3>Login</h3>
           <input
             type="email"
@@ -35,6 +39,12 @@ export default function Login() {
           />
           <button disabled={isLoading}>Login</button>
           <div className="error">{error}</div>
+          <br />
+          <br />
+          <div className="altLink">
+            Don't have an account? <br></br>Create one{" "}
+            <Link to="/signup">here</Link>
+          </div>
         </form>
       </div>
     </div>

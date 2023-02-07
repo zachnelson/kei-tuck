@@ -1,0 +1,48 @@
+.sidebarContainer {
+  /* float: left;
+  background: #e2e2e2;
+  width: 100%;
+  position: fixed; */
+  position: fixed;
+  left: 0;
+  top: 75px;
+  bottom: 0;
+  width: 178px;
+}
+
+.sidebar {
+  border-right: 1px solid black;
+  position: fixed;
+  left: 0;
+  top: 75px;
+  bottom: 0;
+  width: 250px;
+  z-index: 1000;
+}
+
+select {
+  width: 60%;
+  height: 40px;
+  justify-content: center;
+  display: block;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  display: block;
+  /* width: 200px; */
+}
+
+li {
+  width: 200px;
+}

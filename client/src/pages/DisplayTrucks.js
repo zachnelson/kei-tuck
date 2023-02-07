@@ -11,7 +11,7 @@ export default function DisplayTrucks({ model, color, year, type }) {
   });
 
   return (
-    <>
+    <div className="truckList">
       {trucksFilter.length > 0 ? (
         trucksFilter.map((truck) => {
           return (
@@ -31,6 +31,6 @@ export default function DisplayTrucks({ model, color, year, type }) {
       ) : (
         <div id="noMatch">No matching trucks found</div>
       )}
-    </>
+    </div>
   );
 }
