@@ -113,4 +113,26 @@ UserSchema.statics.resetPassword = async function (
   return "success";
 };
 
+UserSchema.statics.updateAccount = async function (id, name, email) {
+  if (!email || !name) {
+    throw Error("All fields are required.");
+  }
+
+  const user = await this.findOne({ _id: id });
+
+  if (!user) {
+    throw Error("Account not found.");
+  }
+
+  user.name = name;
+  user.email = email;
+
+  const save = await user.save();
+  if (!save) {
+    throw Error("Unable to update account.");
+  }
+
+  return "success";
+};
+
 module.exports = mongoose.model("User", UserSchema);

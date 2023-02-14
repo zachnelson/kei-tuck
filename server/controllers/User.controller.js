@@ -8,7 +8,7 @@ const createToken = (_id) => {
 const verifyToken = (token) => {
   return jwt.verify(token, process.env.SECRET_KEY, function (err, decoded) {
     if (err) {
-      console.log(err);
+      console.log("Verifying token error: " + err);
     } else return decoded;
   });
 };
@@ -52,8 +52,30 @@ const resetPassword = async (req, res) => {
   }
 };
 
-const getOneUser = async (req, res) => {
+const updateAccount = async (req, res) => {
+  const { token, name, email } = req.body;
+  const id = verifyToken(token);
+  try {
+    const user = await User.updateAccount(id["_id"], name, email);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const getOneUserByID = async (req, res) => {
   User.findOne({ _id: req.params.id }).exec((err, user) => {
+    if (err) res.send("error: " + err);
+    else {
+      res.json(user);
+    }
+  });
+};
+
+const getOneUserByToken = async (req, res) => {
+  const { token } = req.body;
+  const id = verifyToken(token);
+  User.findOne({ _id: id }, { password: 0, _id: 0 }).exec((err, user) => {
     if (err) res.send("error: " + err);
     else {
       res.json(user);
@@ -74,6 +96,8 @@ module.exports = {
   loginUser,
   signupUser,
   resetPassword,
-  getOneUser,
+  updateAccount,
+  getOneUserByToken,
+  getOneUserByID,
   getAllUsers,
 };

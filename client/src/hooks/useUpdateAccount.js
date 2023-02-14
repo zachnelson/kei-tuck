@@ -2,13 +2,13 @@ import { useState } from "react";
 
 export function useUpdateAccount() {
   const [accountMessage, setAccountMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isAccountLoading, setIsAccountLoading] = useState(null);
 
-  const updateAccount = async (token, id, name, email) => {
-    setIsLoading(true);
+  const updateAccount = async (token, name, email) => {
+    setIsAccountLoading(true);
     setAccountMessage(null);
 
-    const res = await fetch("/api/user/resetPassword", {
+    const res = await fetch("/api/user/updateAccount", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token, name, email }),
@@ -17,10 +17,19 @@ export function useUpdateAccount() {
     const json = await res.json();
 
     if (!res.ok) setAccountMessage(json.error);
-    else setAccountMessage("Password reset was successful.");
-    setIsLoading(false);
+    else setAccountMessage("Account update was successful.");
+    setIsAccountLoading(false);
 
     return res.ok;
   };
-  return { updateAccount, isLoading, accountMessage };
+
+  const getUserByToken = async (token) => {
+    const res = await fetch("/api/user/getOneUserByToken", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token }),
+    });
+    return res.json();
+  };
+  return { updateAccount, getUserByToken, isAccountLoading, accountMessage };
 }

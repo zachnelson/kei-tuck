@@ -12,46 +12,41 @@ export default function Account() {
   const { user } = useAuthContext();
   const { resetPassword, isPasswordLoading, passwordMessage } =
     useResetPassword();
-  const { updateAccount, isAccountLoading, accountMessage } =
+  const { updateAccount, getUserByToken, isAccountLoading, accountMessage } =
     useUpdateAccount();
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("zach@test.com");
+  const [email, setEmail] = useState("");
+  const [funds, setFunds] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [detailsError, setDetailsError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     if (user === null) navigate("/");
   });
 
-  // useEffect(() => {
-  //   const getDetails = async () => {
-  //     const results = await getAccountDetails(userObj["token"]);
-  //     if (results) {
-  //       setPassword("");
-  //       setPassword2("");
-  //     }
-  //   };
-  // }, []);
+  useEffect(() => {
+    const getDetails = async () => {
+      const results = await getUserByToken(user.token);
+      if (results) {
+        setName(results.name);
+        setEmail(results.email);
+        setFunds(results.funds);
+      }
+    };
+    getDetails();
+  }, []);
 
   async function handleAccountUpdate(e) {
     e.preventDefault();
-    const userObj = JSON.parse(localStorage.getItem("user"));
-    const results = await updateAccount(userObj["token"], name, email);
-    if (results) {
-      setPassword("");
-      setPassword2("");
-    }
+    const results = await updateAccount(user.token, name, email);
+    if (results) user.name = name;
   }
 
   async function handlePasswordReset(e) {
     e.preventDefault();
-    setPasswordError("");
-    const userObj = JSON.parse(localStorage.getItem("user"));
     const results = await resetPassword(
-      userObj["token"],
-      userObj["email"],
+      user.token,
+      user.email,
       password,
       password2
     );
@@ -69,18 +64,29 @@ export default function Account() {
           <div className="accountDetails">
             <h2>Account Details</h2>
             <h3>Name</h3>
-            <input type="text" id="userName"></input>
+            <input
+              type="text"
+              id="userName"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></input>
             <h3>Email</h3>
-            <input type="email" id="userEmail"></input>
+            <input
+              type="email"
+              id="userEmail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
             <h3>Available Funds</h3>
-            <input type="text" disabled id="userFunds"></input>
+            <input type="text" value={funds} disabled id="userFunds"></input>
             <button
+              disabled={isAccountLoading}
               onClick={(e) => handleAccountUpdate(e)}
               className="saveButton"
             >
               Save
             </button>
-            <div className="accountError">{detailsError}</div>
+            <div className="accountError">{accountMessage}</div>
           </div>
           <div className="passwordChange">
             <h2>Password Reset</h2>
