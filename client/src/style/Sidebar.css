@@ -1,13 +1,8 @@
 .sidebarContainer {
-  /* float: left;
-  background: #e2e2e2;
-  width: 100%;
-  position: fixed; */
   position: fixed;
   left: 0;
   top: 75px;
   bottom: 0;
-  width: 178px;
 }
 
 .sidebar {

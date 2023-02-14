@@ -1,0 +1,71 @@
+.accountPage {
+  position: relative;
+  width: 100vw;
+  min-height: 90vh;
+  overflow-x: hidden;
+}
+.accountContainer {
+  width: 20%;
+  left: 40%;
+  margin-top: 100px;
+  background-color: white;
+  color: black;
+  position: relative;
+  border-radius: 25px;
+  margin-bottom: 75px;
+  overflow-x: hidden;
+  padding-bottom: 10px;
+}
+.accountContainer input {
+  width: 99%;
+  height: 40px;
+  background: #e0dede;
+  justify-content: center;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.accountContainer button {
+  float: right;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background: #c32121;
+  font-size: 1em;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.accountContainer h3 {
+  margin-bottom: 10px;
+}
+
+.accountDetails {
+  position: relative;
+  width: 70%;
+  margin: auto;
+}
+.passwordChange {
+  width: 70%;
+  margin: auto;
+  /* margin-top: 50px; */
+}
+.accountError,
+.passwordButton,
+.saveButton {
+  display: inline-block;
+  overflow: auto;
+}
+.accountError {
+  text-align: center;
+  color: red;
+}
+.accountError2 {
+  min-height: 50px;
+}

@@ -8,7 +8,8 @@ export default function Header() {
   const { darkMode, setDarkMode } = useThemeContext();
   const { logout } = useLogout();
   const { user } = useAuthContext();
-  let icon = darkMode ? "🌞" : "🌙";
+  let icon = !darkMode ? "🌞" : "🌙";
+  document.body.className = darkMode ? "darkMode" : "";
 
   function handleClick() {
     logout();
@@ -16,16 +17,17 @@ export default function Header() {
 
   function toggleDarkMode() {
     document.body.className = darkMode ? "darkMode" : "";
+    localStorage.setItem("darkMode", !darkMode);
     setDarkMode(!darkMode);
   }
 
   return (
     <header>
-      <div className="container">
+      <div className="headerContainer">
         <Link to="/">
           <h1 className="headerItems">Kei Truck Trader</h1>
         </Link>
-        <span className="links">
+        <span className="headerItems links">
           <button
             className="headerItems"
             title="Toggle Dark Mode"

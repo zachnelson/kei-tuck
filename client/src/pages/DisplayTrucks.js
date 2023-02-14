@@ -1,5 +1,5 @@
 import trucks from "../data/trucks.json";
-import "../style/DisplayTrucks.css";
+import Footer from "./Footer.js";
 
 export default function DisplayTrucks({ model, color, year, type }) {
   let trucksFilter = trucks.filter((truck) => {
@@ -31,6 +31,7 @@ export default function DisplayTrucks({ model, color, year, type }) {
       ) : (
         <div id="noMatch">No matching trucks found</div>
       )}
+      <Footer />
     </div>
   );
 }

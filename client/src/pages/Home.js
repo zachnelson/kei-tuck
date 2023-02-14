@@ -1,6 +1,5 @@
 import "../style/App.css";
 import Header from "./Header.js";
-import Footer from "./Footer.js";
 import { useState } from "react";
 import DisplayTrucks from "./DisplayTrucks";
 import TruckSelect from "./TruckSelect";
@@ -31,7 +30,6 @@ export default function Home() {
         </Sidebar>
         <DisplayTrucks model={model} color={color} year={year} type={type} />
       </div>
-      <Footer />
     </div>
   );
 }

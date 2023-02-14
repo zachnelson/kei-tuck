@@ -4,8 +4,8 @@ export default function Sidebar({ children }) {
     <div className="sidebarContainer">
       <nav className="sidebar">
         <ul>
-          {children.map((child) => {
-            return <li>{child}</li>;
+          {children.map((child, index) => {
+            return <li key={child + index}>{child}</li>;
           })}
         </ul>
       </nav>
