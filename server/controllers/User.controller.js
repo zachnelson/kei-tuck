@@ -5,6 +5,14 @@ const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET_KEY, { expiresIn: "3d" });
 };
 
+const verifyToken = (token) => {
+  return jwt.verify(token, process.env.SECRET_KEY, function (err, decoded) {
+    if (err) {
+      console.log(err);
+    } else return decoded;
+  });
+};
+
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -28,6 +36,22 @@ const signupUser = async (req, res) => {
   }
 };
 
+const resetPassword = async (req, res) => {
+  const { token, email, password, password2 } = req.body;
+  const id = verifyToken(token);
+  try {
+    const user = await User.resetPassword(
+      id["_id"],
+      email,
+      password,
+      password2
+    );
+    res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 const getOneUser = async (req, res) => {
   User.findOne({ _id: req.params.id }).exec((err, user) => {
     if (err) res.send("error: " + err);
@@ -46,4 +70,10 @@ const getAllUsers = async (req, res) => {
   });
 };
 
-module.exports = { loginUser, signupUser, getOneUser, getAllUsers };
+module.exports = {
+  loginUser,
+  signupUser,
+  resetPassword,
+  getOneUser,
+  getAllUsers,
+};

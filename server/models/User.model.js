@@ -67,4 +67,50 @@ UserSchema.statics.login = async function (email, password) {
   return user;
 };
 
+UserSchema.statics.resetPassword = async function (
+  id,
+  email,
+  password,
+  password2
+) {
+  if (!email) {
+    throw Error("All fields are required.");
+  }
+
+  if (
+    password === "" ||
+    password2 === "" ||
+    password === undefined ||
+    password2 === undefined
+  ) {
+    throw Error("Please fill out both password fields.");
+  } else if (password != password2) {
+    throw Error("Both passwords must match.");
+  }
+
+  if (!validator.isStrongPassword(password)) {
+    throw Error("Password is not strong enough. Try again.");
+  }
+
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw Error("Email not found.");
+  }
+
+  if (user._id.toString().indexOf(id) == -1) {
+    throw Error("User token does not match.");
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+
+  user.password = hash;
+  const save = await user.save();
+  if (!save) {
+    throw Error("Unable to reset password.");
+  }
+
+  return "success";
+};
+
 module.exports = mongoose.model("User", UserSchema);

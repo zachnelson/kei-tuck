@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useRef } from "react";
 
 export default function Header() {
   const { darkMode, setDarkMode } = useThemeContext();
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  const headerContainer = useRef();
   let icon = !darkMode ? "🌞" : "🌙";
   document.body.className = darkMode ? "darkMode" : "";
 
@@ -16,14 +18,18 @@ export default function Header() {
   }
 
   function toggleDarkMode() {
-    document.body.className = darkMode ? "darkMode" : "";
+    document.body.className = darkMode ? "darkMode" : "lightMode";
     localStorage.setItem("darkMode", !darkMode);
     setDarkMode(!darkMode);
   }
 
   return (
     <header>
-      <div className="headerContainer">
+      <div
+        id="headerContainer"
+        ref={headerContainer}
+        className={darkMode ? "darkMode" : "lightMode"}
+      >
         <Link to="/">
           <h1 className="headerItems">Kei Truck Trader</h1>
         </Link>

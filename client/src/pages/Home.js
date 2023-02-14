@@ -19,17 +19,17 @@ export default function Home() {
   }
   return (
     <div className="body">
-      <div className="topContent">
-        <Header />
-        <Sidebar>
-          <TruckSelect dataType={"model"} data={model} func={setModel} />
-          <TruckSelect dataType={"color"} data={color} func={setColor} />
-          <TruckSelect dataType={"year"} data={year} func={setYear} />
-          <TruckSelect dataType={"type"} data={type} func={setType} />
-          <button onClick={resetFilter}>Reset filter</button>
-        </Sidebar>
-        <DisplayTrucks model={model} color={color} year={year} type={type} />
-      </div>
+      <Header />
+      <Sidebar>
+        <TruckSelect dataType={"model"} data={model} func={setModel} />
+        <TruckSelect dataType={"color"} data={color} func={setColor} />
+        <TruckSelect dataType={"year"} data={year} func={setYear} />
+        <TruckSelect dataType={"type"} data={type} func={setType} />
+        <button className="redButton" onClick={resetFilter}>
+          Reset filter
+        </button>
+      </Sidebar>
+      <DisplayTrucks model={model} color={color} year={year} type={type} />
     </div>
   );
 }

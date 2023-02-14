@@ -11,26 +11,28 @@ export default function DisplayTrucks({ model, color, year, type }) {
   });
 
   return (
-    <div className="truckList">
-      {trucksFilter.length > 0 ? (
-        trucksFilter.map((truck) => {
-          return (
-            <div className="truckContainer" key={"c" + truck.id}>
-              <div className="truckFrame" key={"f" + truck.id}>
-                <img
-                  className="truckPic"
-                  key={"i" + truck.id}
-                  title={truck.make + " " + truck.model + " " + truck.year}
-                  alt={truck.make + " " + truck.model + " " + truck.year}
-                  src={truck.image}
-                />
+    <div className="truckListContainer">
+      <div className="truckList">
+        {trucksFilter.length > 0 ? (
+          trucksFilter.map((truck) => {
+            return (
+              <div className="truckContainer" key={"c" + truck.id}>
+                <div className="truckFrame" key={"f" + truck.id}>
+                  <img
+                    className="truckPic"
+                    key={"i" + truck.id}
+                    title={truck.make + " " + truck.model + " " + truck.year}
+                    alt={truck.make + " " + truck.model + " " + truck.year}
+                    src={truck.image}
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })
-      ) : (
-        <div id="noMatch">No matching trucks found</div>
-      )}
+            );
+          })
+        ) : (
+          <div id="noMatch">No matching trucks found</div>
+        )}
+      </div>
       <Footer />
     </div>
   );

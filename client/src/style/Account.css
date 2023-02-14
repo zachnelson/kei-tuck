@@ -69,3 +69,7 @@
 .accountError2 {
   min-height: 50px;
 }
+button:disabled {
+  background-color: gray;
+  cursor: wait;
+}

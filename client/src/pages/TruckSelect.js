@@ -43,8 +43,8 @@ export default function TruckSelect({ dataType, data, func }) {
   else if (dataType === "type") dataSet = type;
 
   return (
-    <select onChange={(e) => func(e.target.value)}>
-      <option selected>--Select {dataType}--</option>
+    <select className="truckFilter" onChange={(e) => func(e.target.value)}>
+      <option selected>Select {dataType}</option>
       {dataSet &&
         dataSet.map((d, index) => {
           return (

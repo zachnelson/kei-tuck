@@ -2,28 +2,62 @@ import Footer from "./Footer";
 import Header from "./Header";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../style/Account.css";
-// import "../style/Credentials.css";
+import { useResetPassword } from "../hooks/useResetPassword";
+import { useUpdateAccount } from "../hooks/useUpdateAccount";
 
 export default function Account() {
   const navigate = useNavigate();
   const { user } = useAuthContext();
+  const { resetPassword, isPasswordLoading, passwordMessage } =
+    useResetPassword();
+  const { updateAccount, isAccountLoading, accountMessage } =
+    useUpdateAccount();
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("zach@test.com");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [error, setError] = useState("");
-  const [error2, setError2] = useState("");
+  const [detailsError, setDetailsError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  if (!user) navigate("/");
+  useEffect(() => {
+    if (user === null) navigate("/");
+  });
 
-  function passwordReset() {
-    setError2("");
-    if (password === "" || password2 === "") {
-      setError2("Please fill out both password fields.");
-    } else if (password != password2) {
-      setError2("Both passwords must match.");
+  // useEffect(() => {
+  //   const getDetails = async () => {
+  //     const results = await getAccountDetails(userObj["token"]);
+  //     if (results) {
+  //       setPassword("");
+  //       setPassword2("");
+  //     }
+  //   };
+  // }, []);
+
+  async function handleAccountUpdate(e) {
+    e.preventDefault();
+    const userObj = JSON.parse(localStorage.getItem("user"));
+    const results = await updateAccount(userObj["token"], name, email);
+    if (results) {
+      setPassword("");
+      setPassword2("");
+    }
+  }
+
+  async function handlePasswordReset(e) {
+    e.preventDefault();
+    setPasswordError("");
+    const userObj = JSON.parse(localStorage.getItem("user"));
+    const results = await resetPassword(
+      userObj["token"],
+      userObj["email"],
+      password,
+      password2
+    );
+    if (results) {
+      setPassword("");
+      setPassword2("");
     }
   }
 
@@ -40,29 +74,40 @@ export default function Account() {
             <input type="email" id="userEmail"></input>
             <h3>Available Funds</h3>
             <input type="text" disabled id="userFunds"></input>
-            <button className="saveButton">Save</button>
-            <div className="accountError">{error}</div>
+            <button
+              onClick={(e) => handleAccountUpdate(e)}
+              className="saveButton"
+            >
+              Save
+            </button>
+            <div className="accountError">{detailsError}</div>
           </div>
           <div className="passwordChange">
             <h2>Password Reset</h2>
             <h3>New Password</h3>
             <input
-              type="text"
+              type="password"
               id="newPassword"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></input>
             <h3>Re-type Password</h3>
             <input
-              type="text"
+              type="password"
               id="newPassword2"
               value={password2}
               onChange={(e) => setPassword2(e.target.value)}
             ></input>
-            <button className="passwordButton" onClick={passwordReset}>
+            <button
+              className="passwordButton"
+              disabled={isPasswordLoading}
+              onClick={(e) => handlePasswordReset(e)}
+            >
               Reset
             </button>
-            <span className="accountError accountError2">{error2}</span>
+            <span className="accountError accountError2">
+              {passwordMessage}
+            </span>
           </div>
         </div>
       </div>

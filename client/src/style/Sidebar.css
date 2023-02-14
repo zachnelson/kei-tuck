@@ -6,13 +6,24 @@
 }
 
 .sidebar {
-  border-right: 1px solid black;
+  /* border-right: 1px solid black; */
   position: fixed;
   left: 0;
   top: 75px;
   bottom: 0;
   width: 250px;
   z-index: 1000;
+}
+.sidebar ul {
+  position: absolute;
+  margin-top: 10px;
+  width: 100%;
+}
+.sidebar ul li {
+  width: 100%;
+}
+.truckFilter {
+  width: 100%;
 }
 
 select {

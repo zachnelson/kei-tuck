@@ -1,15 +1,12 @@
 header {
   width: 100%;
-  border-bottom: 1px solid black;
   position: fixed;
   left: 0;
   right: 0;
   height: 75px;
   z-index: 1000;
-  background-color: white;
-  color: black;
 }
-.headerContainer {
+#headerContainer {
   height: 100%;
 }
 .headerItems {
