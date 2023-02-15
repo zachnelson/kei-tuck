@@ -2,8 +2,10 @@ import { useState } from "react";
 import "../style/Credentials.css";
 import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,11 +13,16 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await signup(name, email, password);
+    const user = await signup(name, email, password);
+    if (user) navigate("/");
   }
   return (
     <div className="signupPage">
-      <div className="bigPic" />
+      <img
+        className="bigPic"
+        src="https://www.motortrend.com/uploads/sites/11/2019/09/Suzuki-Carry-Roundcat-Racing-11.jpg"
+        alt="cool red truck"
+      />
       <div className="signupForm">
         <form className="signup" onSubmit={handleSubmit}>
           <div>

@@ -1,14 +1,12 @@
 import Footer from "./Footer";
 import Header from "./Header";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../style/Account.css";
 import { useResetPassword } from "../hooks/useResetPassword";
 import { useUpdateAccount } from "../hooks/useUpdateAccount";
 
 export default function Account() {
-  const navigate = useNavigate();
   const { user } = useAuthContext();
   const { resetPassword, isPasswordLoading, passwordMessage } =
     useResetPassword();
@@ -19,10 +17,6 @@ export default function Account() {
   const [funds, setFunds] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
-  useEffect(() => {
-    if (user === null) navigate("/");
-  });
 
   useEffect(() => {
     const getDetails = async () => {
@@ -117,7 +111,6 @@ export default function Account() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

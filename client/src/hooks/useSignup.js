@@ -26,6 +26,7 @@ export function useSignup() {
       localStorage.setItem("user", JSON.stringify(json));
       dispatch({ type: "login", payload: json });
     }
+    return res.ok;
   };
   return { signup, isLoading, error };
 }

@@ -31,9 +31,12 @@ export default function TruckSelect({ dataType, data, func }) {
     "1996",
     "1997",
     "1998",
+    "1999",
   ]);
 
   const [type] = useState(["Truck", "Van"]);
+
+  const [price] = useState([">1000", ">10000", "<10001", "Not for sale"]);
 
   let dataSet = "";
 
@@ -41,10 +44,13 @@ export default function TruckSelect({ dataType, data, func }) {
   else if (dataType === "color") dataSet = color;
   else if (dataType === "year") dataSet = year;
   else if (dataType === "type") dataSet = type;
+  else if (dataType === "price") dataSet = price;
 
   return (
     <select className="truckFilter" onChange={(e) => func(e.target.value)}>
-      <option selected>Select {dataType}</option>
+      <option value="" selected>
+        Select {dataType}
+      </option>
       {dataSet &&
         dataSet.map((d, index) => {
           return (

@@ -56,6 +56,9 @@ export default function Header() {
               <Link className="headerItems" to="/account">
                 My Account
               </Link>
+              <Link className="headerItems" to={"/inventory/" + user.id}>
+                My Trucks
+              </Link>
               <Link className="headerItems" to="/" onClick={handleClick}>
                 Logout
               </Link>

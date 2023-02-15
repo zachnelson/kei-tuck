@@ -1,6 +1,7 @@
 .footer {
   text-align: center;
   position: relative;
+  height: 75px;
   bottom: 0px;
   width: 100%;
   z-index: 1000;

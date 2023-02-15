@@ -11,9 +11,6 @@ export default function Footer() {
 
   return (
     <div className="footer">
-      <Link to="/">
-        <h1 className="footerElements">Kei Truck Trader</h1>
-      </Link>
       <span id="topLink" className="footerElements" onClick={scrollToTop}>
         Back to top
       </span>

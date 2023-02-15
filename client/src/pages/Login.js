@@ -15,7 +15,11 @@ export default function Login() {
 
   return (
     <div className="loginPage">
-      <div className="bigPic" />
+      <img
+        className="bigPic"
+        src="https://www.motortrend.com/uploads/sites/11/2019/09/Suzuki-Carry-Roundcat-Racing-11.jpg"
+        alt="cool red truck"
+      />
       <div className="loginForm">
         <form className="login" onSubmit={handleSubmit}>
           <div>
