@@ -27,7 +27,7 @@ export default function Signup() {
         <form className="signup" onSubmit={handleSubmit}>
           <div>
             <Link to="/">
-              <h2>Kei Truck Trader</h2>
+              <h2>Mini Truck</h2>
             </Link>
           </div>
           <h3>Signup</h3>

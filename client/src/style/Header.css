@@ -15,6 +15,9 @@ header {
   margin-right: 10px;
   margin-top: 15px;
 }
+.headerItems button {
+  cursor: pointer;
+}
 .links {
   float: right;
 }

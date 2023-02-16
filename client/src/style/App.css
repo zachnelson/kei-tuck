@@ -86,9 +86,6 @@ a {
   min-height: 100vh;
   overflow-x: hidden;
 }
-.headerItems {
-  cursor: pointer;
-}
 .truckList {
   position: relative;
   left: 265px;

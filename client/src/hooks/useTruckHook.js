@@ -16,7 +16,7 @@ export function useTruckHook() {
 
     const json = await res.json();
     if (!res.ok) setTruckPriceMessage(json.error);
-    else setTruckPriceMessage("Set price was successful");
+    else setTruckPriceMessage("Price updated successfully");
     setIsTruckPriceLoading(false);
 
     return json;
@@ -34,7 +34,7 @@ export function useTruckHook() {
 
     const json = await res.json();
     if (!res.ok) setTruckPriceMessage(json.error);
-    else setTruckPriceMessage("Set price was successful");
+    else setTruckPriceMessage("Marked as not for sale");
     setIsTruckPriceLoading(false);
 
     return json;
@@ -52,7 +52,7 @@ export function useTruckHook() {
 
     const json = await res.json();
     if (!res.ok) setTruckPriceMessage(json.error);
-    else setTruckPriceMessage("Set price was successful");
+    else setTruckPriceMessage("Purchase was successful");
     setIsTruckPriceLoading(false);
 
     return json;
@@ -62,6 +62,7 @@ export function useTruckHook() {
     setTruckNFS,
     buyTruck,
     truckPriceMessage,
+    setTruckPriceMessage,
     isTruckPriceLoading,
   };
 }

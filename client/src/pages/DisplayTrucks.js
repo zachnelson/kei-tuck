@@ -19,15 +19,13 @@ export default function DisplayTrucks({
     if (!truck.vehicleType.includes(type)) return false;
     if (
       (price === "Not for sale" && truck.price !== "Not for sale") ||
-      (price === ">1000" && truck.price <= parseFloat(1000) === false) ||
-      (price === ">10000" && truck.price <= parseFloat(10000) === false) ||
+      (price === ">1000" && truck.price < parseFloat(1000) === false) ||
+      (price === ">10000" && truck.price < parseFloat(10000) === false) ||
       (price === "<10001" && truck.price >= parseFloat(10001) === false)
     )
       return false;
     return true;
   });
-
-  console.log(trucksFilter.length);
 
   function handleTruckClick(id) {
     navigate("/truck?id=" + id);
@@ -54,7 +52,7 @@ export default function DisplayTrucks({
                   />
                   <div className="displayPrice">
                     {truck.price !== "Not for sale"
-                      ? "$" + truck.price
+                      ? "$" + parseFloat(truck.price).toLocaleString("en-US")
                       : truck.price}
                   </div>
                 </div>

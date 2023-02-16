@@ -1,31 +1,31 @@
-import { useSearchParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useGetOneTruck } from "../hooks/useGetOneTruck";
 import { useTruckHook } from "../hooks/useTruckHook";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useDisplayTrucks } from "../hooks/useDisplayTrucks";
 import Header from "./Header";
-import Footer from "./Footer";
 import "../style/Truck.css";
 
 export default function Truck() {
   const search = useLocation().search;
   const searchParams = new URLSearchParams(search);
-  const { getOneTruck, truckMessage, isTruckLoading } = useGetOneTruck();
+  const id = searchParams.get("id");
+  const { getOneTruck } = useGetOneTruck();
   const {
     setTruckPrice,
     setTruckNFS,
     buyTruck,
     truckPriceMessage,
-    isTruckPriceLoading,
+    setTruckPriceMessage,
   } = useTruckHook();
   const { user } = useAuthContext();
   const navigate = useNavigate();
-  const id = searchParams.get("id");
   const [truck, setTruck] = useState("");
   const [price, setPrice] = useState("");
-  const [priceMessage, setPriceMessage] = useState("");
+  const { getTrucks } = useDisplayTrucks();
+  const randomTrucks = useRef(null);
 
   const getTruck = async () => {
     const results = await getOneTruck(id);
@@ -34,13 +34,48 @@ export default function Truck() {
     }
   };
 
-  useEffect(() => {
-    if (id === null) navigate("/");
-  }, []);
+  const getAllTrucks = async () => {
+    const results = await getTrucks();
+    if (results) {
+      let trucksFilter = results.filter((truck) => {
+        if (id !== undefined && truck._id === id) return false;
+        return true;
+      });
+      if (randomTrucks.current === null)
+        randomTrucks.current = trucksFilter
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 5)
+          .map((truck) => {
+            return (
+              <div
+                onClick={() => handleOtherTruckClick(truck._id)}
+                className="otherTruckFrame"
+                key={"o" + truck._id}
+              >
+                <img
+                  className="otherTruckPic"
+                  key={"oi" + truck._id}
+                  title={truck.make + " " + truck.model + " " + truck.year}
+                  alt={truck.make + " " + truck.model + " " + truck.year}
+                  src={truck.image}
+                />
+              </div>
+            );
+          });
+    }
+  };
 
   useEffect(() => {
+    if (id === null) navigate("/");
     getTruck();
-  }, []);
+    getAllTrucks();
+    setTruckPriceMessage("");
+  }, [id]);
+
+  function handleOtherTruckClick(id) {
+    randomTrucks.current = null;
+    navigate("/truck?id=" + id);
+  }
 
   async function handleSetPriceClick() {
     await setTruckPrice(user.token, id, price);
@@ -90,10 +125,12 @@ export default function Truck() {
               <h2>
                 Price:{" "}
                 {truck.price !== "Not for sale"
-                  ? "$" + truck.price
+                  ? "$" + parseFloat(truck.price).toLocaleString("en-US")
                   : truck.price}
               </h2>
-              {truck.ownerId !== undefined && user.id === truck.ownerId._id ? (
+              {truck.ownerId !== undefined &&
+              user &&
+              user.id === truck.ownerId._id ? (
                 <div>
                   <input
                     value={price}
@@ -119,13 +156,11 @@ export default function Truck() {
                   <button className="truckPageButton" onClick={handleNFSClick}>
                     Not for sale
                   </button>
-                  {priceMessage !== "" && (
-                    <div className="priceMessage">{priceMessage}</div>
-                  )}
+                  <div className="tradeMessage">{truckPriceMessage}</div>
                 </div>
               ) : (
                 <>
-                  {truck.price !== "Not for sale" && (
+                  {truck.price !== "Not for sale" && user && (
                     <div>
                       <button
                         onClick={handleBuyClick}
@@ -133,6 +168,7 @@ export default function Truck() {
                       >
                         Buy
                       </button>
+                      <div className="tradeMessage">{truckPriceMessage}</div>
                     </div>
                   )}
                 </>
@@ -142,6 +178,9 @@ export default function Truck() {
         ) : (
           <div>Loading...</div>
         )}
+        <div className="otherTruckContainer">
+          {randomTrucks.current ? randomTrucks.current : "Loading..."}
+        </div>
       </div>
     </>
   );

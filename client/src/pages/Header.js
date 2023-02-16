@@ -31,7 +31,7 @@ export default function Header() {
         className={darkMode ? "darkMode" : "lightMode"}
       >
         <Link to="/">
-          <h1 className="headerItems">Kei Truck Trader</h1>
+          <h1 className="headerItems">Mini Truck</h1>
         </Link>
         <span className="headerItems links">
           <button
@@ -52,7 +52,10 @@ export default function Header() {
             </>
           ) : (
             <>
-              <span className="headerItems">Hello, {user.name}</span>
+              <span className="headerItems">
+                Hello,{" "}
+                {user.name + " ($" + user.funds.toLocaleString("en-US") + ")"}
+              </span>
               <Link className="headerItems" to="/account">
                 My Account
               </Link>
